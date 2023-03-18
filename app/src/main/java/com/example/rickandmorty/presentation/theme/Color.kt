@@ -9,7 +9,7 @@ val Teal200 = Color(0xFF03DAC5)
 
 
 val white = Color(0xFFE8F9FD)
-val yellow = Color(0xFF59CE8F)
+val green = Color(0xFF59CE8F)
 val black = Color(0xFF000000)
 
 
