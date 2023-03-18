@@ -16,7 +16,7 @@ fun Navigation(navController: NavHostController) {
     NavHost(navController = navController, startDestination = NavigationItem.SplashScreen.route) {
 
         composable(NavigationItem.SplashScreen.route) {
-            SplashScreen()
+            SplashScreen(navController)
         }
         composable(NavigationItem.HomeScreen.route) {
             HomeScreen()
