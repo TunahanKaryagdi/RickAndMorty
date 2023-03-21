@@ -1,6 +1,8 @@
 package com.example.rickandmorty.ui.theme
 
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Typography
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
@@ -14,13 +16,16 @@ val Typography = Typography(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Normal,
         fontSize = 22.sp,
-        fontStyle = FontStyle(R.font.avenir_black)
+        fontStyle = FontStyle(R.font.avenir_black),
+        color = Color.Black
     ),
     h1 = TextStyle(
         fontFamily = FontFamily.Default,
         fontWeight = FontWeight.Bold,
         fontSize = 22.sp,
-        fontStyle = FontStyle(R.font.avenir_black)
+        fontStyle = FontStyle(R.font.avenir_black),
+        color = Color.Black
+
     )
     /* Other default text styles to override
     button = TextStyle(
