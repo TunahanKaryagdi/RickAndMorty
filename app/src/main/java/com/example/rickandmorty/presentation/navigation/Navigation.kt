@@ -19,7 +19,7 @@ fun Navigation(navController: NavHostController) {
             SplashScreen(navController)
         }
         composable(NavigationItem.HomeScreen.route) {
-            HomeScreen()
+            HomeScreen(navController)
         }
         composable(NavigationItem.DetailScreen.route) {
             DetailScreen()

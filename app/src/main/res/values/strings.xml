@@ -4,4 +4,5 @@
     <string name="welcome">Welcome!</string>
     <string name="character_logo">%s logo</string>
     <string name="gender">gender</string>
+    <string name="arrow_back">Arrow Back</string>
 </resources>

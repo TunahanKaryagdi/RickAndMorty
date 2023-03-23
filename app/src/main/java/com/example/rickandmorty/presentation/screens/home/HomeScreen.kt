@@ -3,6 +3,7 @@ package com.example.rickandmorty.presentation.screens.home
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -15,10 +16,14 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.rickandmorty.R
+import com.example.rickandmorty.presentation.navigation.NavigationItem
 
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    navController: NavController
+) {
 
 
     Column(
@@ -56,13 +61,17 @@ fun HomeScreen() {
                         imageUrl = "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
                         name = "Beth Smith",
                         gender = "female"
-                    )
+                    ) {
+                        navController.navigate(NavigationItem.DetailScreen.route)
+                    }
                 } else {
                     CustomRightBasedCard(
                         imageUrl = "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
                         name = "Bill",
                         gender = "male"
-                    )
+                    ){
+                        navController.navigate(NavigationItem.DetailScreen.route)
+                    }
                 }
                 Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.ten)))
 
@@ -96,7 +105,8 @@ fun CustomTextButton(
 fun CustomLeftBasedCard(
     imageUrl: String,
     name: String,
-    gender: String
+    gender: String,
+    onClick: () -> Unit
 ) {
 
     Card(
@@ -104,6 +114,9 @@ fun CustomLeftBasedCard(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
+            .clickable {
+                onClick()
+            }
     ) {
 
         Row(
@@ -149,7 +162,8 @@ fun CustomLeftBasedCard(
 fun CustomRightBasedCard(
     imageUrl: String,
     name: String,
-    gender: String
+    gender: String,
+    onClick: () -> Unit
 ) {
 
     Card(
@@ -157,6 +171,9 @@ fun CustomRightBasedCard(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
+            .clickable {
+                onClick()
+            }
     ) {
 
         Row(
