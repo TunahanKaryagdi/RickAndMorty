@@ -1,6 +1,8 @@
 package com.example.rickandmorty.di
 
 import com.example.rickandmorty.data.remote.RickAndMortyApi
+import com.example.rickandmorty.data.repository.RamRepositoryImpl
+import com.example.rickandmorty.domain.repository.RamRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -18,12 +20,19 @@ object AppModule {
 
     @Singleton
     @Provides
-    fun provideApi(){
-        Retrofit.Builder()
+    fun provideApi() : RickAndMortyApi{
+        return Retrofit.Builder()
             .baseUrl("https://rickandmortyapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(RickAndMortyApi::class.java)
     }
+
+    @Provides
+    @Singleton
+    fun provideRamRepository(api : RickAndMortyApi) : RamRepository{
+        return RamRepositoryImpl(api)
+    }
+
 
 }
