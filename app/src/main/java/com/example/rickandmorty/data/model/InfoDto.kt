@@ -1,6 +1,6 @@
 package com.example.rickandmorty.data.model
 
-data class Info(
+data class InfoDto(
     val count: Int,
     val next: String,
     val pages: Int,

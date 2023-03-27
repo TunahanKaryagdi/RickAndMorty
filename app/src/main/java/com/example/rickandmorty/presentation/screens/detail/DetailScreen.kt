@@ -17,10 +17,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.rickandmorty.R
+import com.example.rickandmorty.domain.model.Resident
 
 @Composable
-fun DetailScreen() {
+fun DetailScreen(
+    navController: NavController,
+) {
 
 
     Column(
@@ -44,6 +48,7 @@ fun DetailScreen() {
                     .align(Alignment.CenterStart)
                     .clickable {
 
+                        navController.popBackStack()
                     }
             )
             Text(

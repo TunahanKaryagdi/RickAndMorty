@@ -22,7 +22,7 @@ fun Navigation(navController: NavHostController) {
             HomeScreen(navController)
         }
         composable(NavigationItem.DetailScreen.route) {
-            DetailScreen()
+            DetailScreen(navController)
         }
     }
 

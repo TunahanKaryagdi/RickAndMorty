@@ -3,8 +3,8 @@ package com.example.rickandmorty.data.model
 import com.example.rickandmorty.domain.model.Location
 
 data class LocationDto(
-    val info: Info,
-    val results: List<Result>
+    val info: InfoDto,
+    val results: List<ResultDto>
 )
 
 
@@ -14,7 +14,8 @@ fun LocationDto.toLocation(): List<Location> {
         list.add(
             Location(
                 id = result.id,
-                name = result.name
+                name = result.name,
+                residents = result.residents
             )
         )
     }

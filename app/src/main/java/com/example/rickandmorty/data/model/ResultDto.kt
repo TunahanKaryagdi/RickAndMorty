@@ -1,6 +1,6 @@
 package com.example.rickandmorty.data.model
 
-data class Result(
+data class ResultDto(
     val created: String,
     val dimension: String,
     val id: Int,

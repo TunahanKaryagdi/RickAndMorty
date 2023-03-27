@@ -18,7 +18,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import coil.compose.AsyncImage
 import com.example.rickandmorty.R
+import com.example.rickandmorty.domain.model.Resident
 import com.example.rickandmorty.presentation.navigation.NavigationItem
 
 @Composable
@@ -47,8 +49,12 @@ fun HomeScreen(
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.twenty)))
         LazyRow {
 
-            items(20) {
-                CustomTextButton(text = "Abadango", {}, it == 0)
+            items(viewModel.locationList.size) {
+                CustomTextButton(
+                    text = if (viewModel.locationList.isEmpty()) "" else viewModel.locationList[it].name,
+                    onClick = { viewModel.updateSelectedLocation(it)  },
+                    isSelected = it == viewModel.selectedLocation
+                )
                 Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.ten)))
 
             }
@@ -56,30 +62,34 @@ fun HomeScreen(
 
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.twenty)))
 
-        LazyColumn {
-            items(5) { count ->
-                if (count % 2 == 0) {
-                    CustomLeftBasedCard(
-                        imageUrl = "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-                        name = "Beth Smith",
-                        gender = "female"
-                    ) {
-                        navController.navigate(NavigationItem.DetailScreen.route)
+        if(!viewModel.loading){
+            LazyColumn {
+                items(viewModel.residentList.size) { count ->
+                    if (count % 2 == 0) {
+                        CustomLeftBasedCard(
+
+                            resident = viewModel.residentList[count]
+                        ) {
+                            navController.navigate(NavigationItem.DetailScreen.route)
+                        }
+                    } else {
+                        CustomRightBasedCard(
+                            resident = viewModel.residentList[count]
+
+                        ) {
+                            navController.navigate(NavigationItem.DetailScreen.route)
+                        }
                     }
-                } else {
-                    CustomRightBasedCard(
-                        imageUrl = "https://rickandmortyapi.com/api/character/avatar/2.jpeg",
-                        name = "Bill",
-                        gender = "male"
-                    ){
-                        navController.navigate(NavigationItem.DetailScreen.route)
-                    }
+                    Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.ten)))
+
+
                 }
-                Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.ten)))
-
-
             }
         }
+        else{
+            CircularProgressIndicator(color = MaterialTheme.colors.secondary)
+        }
+
     }
 }
 
@@ -105,9 +115,8 @@ fun CustomTextButton(
 
 @Composable
 fun CustomLeftBasedCard(
-    imageUrl: String,
-    name: String,
-    gender: String,
+
+    resident: Resident,
     onClick: () -> Unit
 ) {
 
@@ -121,15 +130,16 @@ fun CustomLeftBasedCard(
             }
     ) {
 
+        println(resident.url)
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
                 .fillMaxSize()
         ) {
-            Image(
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+            AsyncImage(
+                model = resident.imageUrl,
                 contentDescription = stringResource(
-                    id = R.string.character_logo, name
+                    id = R.string.character_logo, resident.name
                 ),
                 modifier = Modifier
                     .weight(2f)
@@ -143,13 +153,13 @@ fun CustomLeftBasedCard(
             ) {
                 Image(
                     modifier = Modifier.fillMaxHeight(),
-                    painter = painterResource(id = if (gender == "male") R.drawable.ic_male else if (gender == "female") R.drawable.ic_female else R.drawable.ic_question_mark),
+                    painter = painterResource(id = if (resident.gender == "Male") R.drawable.ic_male else if (resident.gender == "Female") R.drawable.ic_female else R.drawable.ic_question_mark),
                     contentDescription = stringResource(
                         id = R.string.gender
                     )
                 )
                 Text(
-                    text = name,
+                    text = resident.name,
                     style = MaterialTheme.typography.h1,
                     modifier = Modifier.align(Alignment.CenterEnd)
                 )
@@ -162,9 +172,7 @@ fun CustomLeftBasedCard(
 
 @Composable
 fun CustomRightBasedCard(
-    imageUrl: String,
-    name: String,
-    gender: String,
+    resident: Resident,
     onClick: () -> Unit
 ) {
 
@@ -192,22 +200,22 @@ fun CustomRightBasedCard(
                 Image(
                     modifier = Modifier
                         .align(Alignment.CenterEnd),
-                    painter = painterResource(id = if (gender == "male") R.drawable.ic_male else if (gender == "female") R.drawable.ic_female else R.drawable.ic_question_mark),
+                    painter = painterResource(id = if (resident.gender == "male") R.drawable.ic_male else if (resident.gender == "female") R.drawable.ic_female else R.drawable.ic_question_mark),
                     contentDescription = stringResource(
                         id = R.string.gender
                     )
                 )
-                Text(text = name, style = MaterialTheme.typography.h1)
+                Text(text = resident.name, style = MaterialTheme.typography.h1)
             }
-            Image(
+
+            AsyncImage(
                 modifier = Modifier
                     .weight(2f),
-                painter = painterResource(id = R.drawable.ic_launcher_background),
+                model = resident.imageUrl,
                 contentDescription = stringResource(
-                    id = R.string.character_logo, name
+                    id = R.string.character_logo, resident.name
                 )
             )
-
         }
     }
 }
