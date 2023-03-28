@@ -8,4 +8,7 @@ interface RamRepository {
     suspend fun getLocation() : LocationDto
 
     suspend fun getResidentsByLocation(ids :String) : List<ResidentDto>
+
+    suspend fun getSingleResident(id: String) : ResidentDto
+
 }

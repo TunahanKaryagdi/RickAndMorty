@@ -1,8 +1,7 @@
 package com.example.rickandmorty.presentation.navigation
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.NavHost
-import androidx.navigation.NavHostController
+import androidx.navigation.*
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.rickandmorty.presentation.screens.detail.DetailScreen
@@ -21,7 +20,7 @@ fun Navigation(navController: NavHostController) {
         composable(NavigationItem.HomeScreen.route) {
             HomeScreen(navController)
         }
-        composable(NavigationItem.DetailScreen.route) {
+        composable(NavigationItem.DetailScreen.route+"{id}", arguments = listOf(navArgument("id"){type = NavType.StringType})) {
             DetailScreen(navController)
         }
     }
@@ -34,6 +33,6 @@ sealed class NavigationItem(val route: String) {
 
     object SplashScreen : NavigationItem("splash")
     object HomeScreen : NavigationItem("home")
-    object DetailScreen : NavigationItem("detail")
+    object DetailScreen : NavigationItem("detail/")
 
 }

@@ -13,4 +13,8 @@ interface RickAndMortyApi {
 
     @GET("api/character/{ids}")
     suspend fun getResidentsByLocation(@Path("ids") ids : String) : List<ResidentDto>
+
+    @GET("api/character/{id}")
+    suspend fun getSingleResident(@Path("id") id: String) : ResidentDto
+
 }

@@ -15,4 +15,8 @@ class RamRepositoryImpl @Inject constructor(private val api: RickAndMortyApi) : 
     override suspend fun getResidentsByLocation(ids: String): List<ResidentDto> {
         return api.getResidentsByLocation(ids)
     }
+
+    override suspend fun getSingleResident(id: String): ResidentDto {
+        return api.getSingleResident(id)
+    }
 }

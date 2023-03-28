@@ -1,6 +1,7 @@
 package com.example.rickandmorty.data.model
 
 import com.example.rickandmorty.domain.model.Resident
+import com.example.rickandmorty.domain.model.ResidentDetail
 
 data class ResidentDto(
     val created: String,
@@ -22,7 +23,17 @@ fun ResidentDto.toResident() : Resident{
     return Resident(
         id = this.id,
         name = this.name,
-        url = this.url,
+        gender = this.gender,
+        imageUrl = this.image
+    )
+}
+
+
+
+fun ResidentDto.toResidentDetail() : ResidentDetail{
+    return ResidentDetail(
+        id = this.id,
+        name = this.name,
         status = this.status,
         specy = this.species,
         gender = this.gender,
@@ -30,6 +41,6 @@ fun ResidentDto.toResident() : Resident{
         location = this.location.name,
         episodes = this.episode,
         createdAt = this.created,
-        imageUrl = this.image
+        image = this.image
     )
 }

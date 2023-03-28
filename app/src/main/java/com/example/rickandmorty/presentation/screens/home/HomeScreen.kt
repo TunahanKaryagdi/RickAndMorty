@@ -18,6 +18,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
+import androidx.navigation.navArgument
 import coil.compose.AsyncImage
 import com.example.rickandmorty.R
 import com.example.rickandmorty.domain.model.Resident
@@ -67,17 +68,16 @@ fun HomeScreen(
                 items(viewModel.residentList.size) { count ->
                     if (count % 2 == 0) {
                         CustomLeftBasedCard(
-
                             resident = viewModel.residentList[count]
                         ) {
-                            navController.navigate(NavigationItem.DetailScreen.route)
+                            navController.navigate(NavigationItem.DetailScreen.route+"${viewModel.residentList[count].id}")
                         }
                     } else {
                         CustomRightBasedCard(
                             resident = viewModel.residentList[count]
 
                         ) {
-                            navController.navigate(NavigationItem.DetailScreen.route)
+                            navController.navigate(NavigationItem.DetailScreen.route+"${viewModel.residentList[count].id}")
                         }
                     }
                     Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.ten)))
@@ -130,7 +130,6 @@ fun CustomLeftBasedCard(
             }
     ) {
 
-        println(resident.url)
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier

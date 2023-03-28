@@ -81,7 +81,7 @@ class HomeViewModel @Inject constructor(
             var ids = ""
             val residentsUrl =
                 if (locationList.isNotEmpty()) locationList[selectedLocation].residents else emptyList()
-            println("$residentsUrl asdfkadsfsdaşfadkfajfdşka")
+
             residentsUrl.forEach { url ->
                 ids += url.split("/").last() + ","
             }
@@ -89,13 +89,11 @@ class HomeViewModel @Inject constructor(
                 when (resource) {
 
                     is Resource.Loading -> {
-                        println("---------Loading--------------")
+                        loading = true
                     }
                     is Resource.Error -> {
-                        println("---------Error${resource.message}--------------")
                     }
                     is Resource.Success -> {
-                        println("---------Success ${resource.data?.size}--------------")
                         loading = false
                         residentList = resource.data ?: emptyList()
 
@@ -107,9 +105,9 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    fun updateSelectedLocation(id : Int){
+    fun updateSelectedLocation(id: Int) {
 
-        if (id != selectedLocation){
+        if (id != selectedLocation) {
             selectedLocation = id
             getResidents()
         }
