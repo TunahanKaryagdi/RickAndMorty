@@ -82,6 +82,7 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.3.0")
 
 
+
 }
 kapt {
     correctErrorTypes = true

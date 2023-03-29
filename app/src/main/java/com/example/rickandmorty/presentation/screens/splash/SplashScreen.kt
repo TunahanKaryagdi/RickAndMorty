@@ -13,13 +13,14 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import com.example.rickandmorty.R
 import com.example.rickandmorty.presentation.navigation.NavigationItem
 import kotlinx.coroutines.delay
 
 @Composable
-fun SplashScreen(navController: NavController) {
+fun SplashScreen(navController: NavController, viewModel: SplashViewModel = hiltViewModel()) {
 
 
     val scale = remember {
@@ -59,6 +60,12 @@ fun SplashScreen(navController: NavController) {
             )
         )
         Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.ten)))
-        Text(text = stringResource(id = R.string.welcome), style = MaterialTheme.typography.h1)
+        if (viewModel.firstTime==true){
+            Text(text = stringResource(id = R.string.welcome), style = MaterialTheme.typography.h1)
+        }
+        else{
+            Text(text = stringResource(id = R.string.hello), style = MaterialTheme.typography.h1)
+
+        }
     }
 }
