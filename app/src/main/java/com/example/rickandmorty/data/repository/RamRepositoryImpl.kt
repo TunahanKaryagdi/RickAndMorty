@@ -8,8 +8,8 @@ import javax.inject.Inject
 
 class RamRepositoryImpl @Inject constructor(private val api: RickAndMortyApi) : RamRepository {
 
-    override suspend fun getLocation(): LocationDto {
-        return api.getLocation()
+    override suspend fun getLocation(page: Int): LocationDto {
+        return api.getLocation(page)
     }
 
     override suspend fun getResidentsByLocation(ids: String): List<ResidentDto> {

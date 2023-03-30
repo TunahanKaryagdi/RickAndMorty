@@ -5,7 +5,7 @@ import com.example.rickandmorty.data.model.ResidentDto
 
 interface RamRepository {
 
-    suspend fun getLocation() : LocationDto
+    suspend fun getLocation(page :Int) : LocationDto
 
     suspend fun getResidentsByLocation(ids :String) : List<ResidentDto>
 

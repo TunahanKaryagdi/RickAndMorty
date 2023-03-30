@@ -51,12 +51,21 @@ fun HomeScreen(
         LazyRow {
 
             items(viewModel.locationList.size) {
+
+
+                if(viewModel.locationList.size == it + 1){
+                    viewModel.loadNewLocations()
+                }
+
                 CustomTextButton(
                     text = if (viewModel.locationList.isEmpty()) "" else viewModel.locationList[it].name,
                     onClick = { viewModel.updateSelectedLocation(it)  },
                     isSelected = it == viewModel.selectedLocation
                 )
                 Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.ten)))
+                if(viewModel.lazyRowLoading){
+                    CircularProgressIndicator(color = MaterialTheme.colors.secondary)
+                }
 
             }
         }

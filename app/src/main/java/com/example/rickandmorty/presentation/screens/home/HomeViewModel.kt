@@ -34,11 +34,14 @@ class HomeViewModel @Inject constructor(
     var residentList by mutableStateOf<List<Resident>>(emptyList())
         private set
 
-
     var loading by mutableStateOf(false)
+        private set
+
+    var lazyRowLoading = false
+
+    var pageSize = 1
 
     init {
-
 
         getLocations()
         getResidents()
@@ -49,7 +52,7 @@ class HomeViewModel @Inject constructor(
 
         viewModelScope.launch {
 
-            getLocationUseCase.invoke().collect { resource ->
+            getLocationUseCase.invoke(pageSize).collect { resource ->
 
                 when (resource) {
 
@@ -102,6 +105,33 @@ class HomeViewModel @Inject constructor(
             }
         }
 
+    }
+
+
+    fun loadNewLocations() {
+
+        lazyRowLoading =true
+        pageSize +=1
+        viewModelScope.launch {
+            delay(1500)
+            getLocationUseCase.invoke(pageSize).collect { resource ->
+
+                when (resource) {
+
+                    is Resource.Loading -> {
+                    }
+                    is Resource.Error -> {
+                    }
+                    is Resource.Success -> {
+                        locationList += resource.data ?: emptyList()
+
+                        lazyRowLoading = false
+
+                    }
+                }
+
+            }
+        }
     }
 
 

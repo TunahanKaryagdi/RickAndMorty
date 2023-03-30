@@ -10,11 +10,11 @@ import javax.inject.Inject
 
 class GetLocationUseCase @Inject constructor(private val repository: RamRepository) {
 
-    operator fun invoke() : Flow<Resource<List<Location>>>{
+    operator fun invoke(page:Int) : Flow<Resource<List<Location>>>{
         return flow {
             try {
                 emit(Resource.Loading())
-                val response = repository.getLocation().toLocation()
+                val response = repository.getLocation(page).toLocation()
                 emit(Resource.Success(response))
 
             }
