@@ -1,6 +1,5 @@
 package com.example.rickandmorty.presentation.screens.detail
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -10,15 +9,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.rickandmorty.R
-import com.example.rickandmorty.domain.model.Resident
 
 @Composable
 fun DetailScreen(
@@ -53,7 +49,7 @@ fun DetailScreen(
                         }
                 )
                 Text(
-                    text = viewModel.residentDetail?.name ?: "Unnamed",
+                    text = viewModel.residentDetail?.name ?: stringResource(id = R.string.unnamed),
                     style = MaterialTheme.typography.h1,
                     modifier = Modifier
                         .align(Alignment.Center)
@@ -84,7 +80,7 @@ fun DetailScreen(
             CustomRow(key = "Created at(in API):", value = viewModel.residentDetail?.createdAt ?: "Unknown")
         }
         else{
-            CircularProgressIndicator(color = MaterialTheme.colors.secondary)
+            CircularProgressIndicator(color = MaterialTheme.colors.secondary,)
         }
 
 

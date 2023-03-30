@@ -79,15 +79,9 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
 
             loading = true
-            delay(2000L)
+            delay(1500)
 
-            var ids = ""
-            val residentsUrl =
-                if (locationList.isNotEmpty()) locationList[selectedLocation].residents else emptyList()
-
-            residentsUrl.forEach { url ->
-                ids += url.split("/").last() + ","
-            }
+            var ids = getIdsFromUrl()
             getResidentsUseCase(ids).collect { resource ->
                 when (resource) {
 
@@ -124,7 +118,6 @@ class HomeViewModel @Inject constructor(
                     }
                     is Resource.Success -> {
                         locationList += resource.data ?: emptyList()
-
                         lazyRowLoading = false
 
                     }
@@ -141,5 +134,16 @@ class HomeViewModel @Inject constructor(
             selectedLocation = id
             getResidents()
         }
+    }
+
+    private fun getIdsFromUrl() : String{
+        var ids = ""
+        val residentsUrl =
+            if (locationList.isNotEmpty()) locationList[selectedLocation].residents else emptyList()
+
+        residentsUrl.forEach { url ->
+            ids += url.split("/").last() + ","
+        }
+        return  ids
     }
 }

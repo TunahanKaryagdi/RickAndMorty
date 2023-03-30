@@ -18,7 +18,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavController
-import androidx.navigation.navArgument
 import coil.compose.AsyncImage
 import com.example.rickandmorty.R
 import com.example.rickandmorty.domain.model.Resident
@@ -208,7 +207,7 @@ fun CustomRightBasedCard(
                 Image(
                     modifier = Modifier
                         .align(Alignment.CenterEnd),
-                    painter = painterResource(id = if (resident.gender == "male") R.drawable.ic_male else if (resident.gender == "female") R.drawable.ic_female else R.drawable.ic_question_mark),
+                    painter = painterResource(id = if (resident.gender == "Male") R.drawable.ic_male else if (resident.gender == "Female") R.drawable.ic_female else R.drawable.ic_question_mark),
                     contentDescription = stringResource(
                         id = R.string.gender
                     )

@@ -1,6 +1,5 @@
 package com.example.rickandmorty.presentation.screens.detail
 
-import android.hardware.lights.LightState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -8,13 +7,9 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmorty.domain.model.ResidentDetail
-import com.example.rickandmorty.domain.repository.RamRepository
 import com.example.rickandmorty.domain.use_cases.GetResidentUseCase
 import com.example.rickandmorty.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Delay
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
